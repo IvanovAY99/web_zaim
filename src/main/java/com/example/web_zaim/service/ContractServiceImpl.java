@@ -39,7 +39,7 @@ public class ContractServiceImpl implements ContractService {
         for (Contract contract : contractList
         ) {
             var contractStartDate = contract.getFirstPaymentsDate();
-            for (Character charPayment : contract.getPayments().toCharArray()
+            for (Character charPayment : reverseWithCharArray(contract.getPayments()).toCharArray()
             ) {
                 for (Date date : dateCharHashMap.keySet()
                 ) {
@@ -71,5 +71,14 @@ public class ContractServiceImpl implements ContractService {
         log.info(String.valueOf(resultString));
 
         return dateCharHashMap.values().toString();
+    }
+
+    public static String reverseWithCharArray(String inputString) {
+        char[] charArray = inputString.toCharArray();
+        String resultString = "";
+        for (int i = charArray.length - 1; i >= 0; i--) {
+            resultString += charArray[i];
+        }
+        return resultString;
     }
 }
